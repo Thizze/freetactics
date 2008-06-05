@@ -1,8 +1,11 @@
 ﻿Public Class BattleEnemy
-    Dim X As Integer
-    Dim Y As Integer
-    Dim H As Integer
-    Dim M As Integer
+    Private X As Integer
+    Private Y As Integer
+    Private H As Integer
+    Private M As Integer
+    Private S As Integer
+    Public Counter As Integer
+    Public Reserve As Integer
     'Dim S As SkillSet
     Const A As Integer = 1 'AIType
     Public Property PositionX() As Integer
@@ -37,4 +40,22 @@
             M = value
         End Set
     End Property
+    Public Property Speed()
+        Get
+            Return S
+        End Get
+        Set(ByVal value)
+            S = value
+        End Set
+    End Property
+    Public Sub DoAction()
+        Select Case A '##FOR DEBUG ONLY - PRESET AI MODES FOR TESTING PURPOSES - REMOVE WHEN AI DEVELOPMENT BEGINS##
+            Case Is = 1
+                Log("This battle enemy has finished its action.")
+        End Select
+    End Sub
+
+    Public Sub New()
+        Log("Battle enemy initialised.")
+    End Sub
 End Class
