@@ -2,6 +2,7 @@
     Dim Enemies(2) As BattleEnemy
     Sub BattleStart(ByVal BattleID As Integer, Optional ByVal TurnCount As Integer = 30)
         '##BATTLE SYSTEM WILL NEED RECODING TO SUPPORT UP TO 4 TEAMS PER FIELD RATHER THAN JUST PLAYER AND OPPOSITION##
+        MapViewer.Show()
         tsTimerPause.Enabled = True
         Dim items(2) As ListViewItem
         items(0) = New ListViewItem("First A.I.")
@@ -14,13 +15,14 @@
         Dim Turns As Integer = TurnCount
         Dim EnemyCount As Integer
         Dim PlayerCount As Integer
+        Dim tempString 'DEBUG VARIABLE - USED TO PREPARE STRINGS FOR DEBUG MAP VIEWER SO THAT THERE ARE NO SPACES IN THEM
         Dim Terminated As Integer 'a variable that when more than 0 will signify the battle has been terminated
         'regardless of no turns, lack of player count or lack of enemy count, e.g. a special battle event
         If BattleID > 0 Then 'if the battle id is valid, load the battle
         Else 'otherwise load the debug battle
             Enemies(0) = New BattleEnemy
-            Enemies(0).PositionX = 1
-            Enemies(0).PositionY = 1
+            Enemies(0).PositionX = 0
+            Enemies(0).PositionY = 0
             Enemies(0).HP = 100
             Enemies(0).MP = 20
             Enemies(0).Speed = 10
@@ -31,8 +33,8 @@
             Enemies(1).MP = 20
             Enemies(1).Speed = 5
             Enemies(2) = New BattleEnemy
-            Enemies(2).PositionX = 2
-            Enemies(2).PositionY = 1
+            Enemies(2).PositionX = 1
+            Enemies(2).PositionY = 2
             Enemies(2).HP = 100
             Enemies(2).MP = 20
             Enemies(2).Speed = 7
@@ -40,6 +42,9 @@
             For temp = 0 To Enemies.GetUpperBound(0)
                 Enemies(temp).Counter = 0
                 Enemies(temp).Reserve = 0
+                tempString = Str(temp + 1)
+                tempString = tempString.Replace(" ", String.Empty)
+                MapViewer.Entities(Enemies(temp).PositionX, Enemies(temp).PositionY) = tempString
             Next
             Log("Created new battle: debug battle. Created default enemies on field.")
             DisplayFPS.Start()

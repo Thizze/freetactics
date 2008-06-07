@@ -176,6 +176,7 @@ Partial Class Main
         Me.Controls.Add(Me.txtLog)
         Me.Controls.Add(Me.statusBar)
         Me.Controls.Add(Me.MenuStrip1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "Main"
         Me.Text = "FreeTactics Debug"
         Me.MenuStrip1.ResumeLayout(False)
